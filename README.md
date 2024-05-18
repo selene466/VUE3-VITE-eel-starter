@@ -15,7 +15,7 @@ It is not unlike electron...
 - Installed iconify-json to work offline: bxs, fluent, ic, mdi, noto
 - Use webview instead of Chrome engine
 
-Check `vite.config.js.
+Check `vite.config.js`.
 
 ## Start a new app
 
