@@ -1,7 +1,21 @@
 # Vue starter project for Eel
 
-This is a basic [eel](https://github.com/python-eel/Eel) + [VUE.js 3](https://vuejs.org/) + [VITE](https://vitejs.dev/). It will create a local app with python as backend and VITE+VUE3 as front-end.
-It is not unlike electron
+This is a starter template [eel](https://github.com/python-eel/Eel) + [VUE.js 3](https://vuejs.org/) + [VITE](https://vitejs.dev/). It will create a local app with python as backend and VITE + VUE3 as front-end.
+It is not unlike electron...
+
+## Whats new
+
+- Added Tailwind v3
+- Integrated UI with daisyUI v4
+- Automatic class sorting with Prettier
+- Auto import components & layouts
+- Auto import icons
+- Auto router
+- Support for theme changer
+- Installed iconify-json to work offline: bxs, fluent, ic, mdi, noto
+- Use webview instead of Chrome engine
+
+Check `vite.config.js.
 
 ## Start a new app
 
@@ -11,8 +25,9 @@ Copy this repo and you are ready to start.
 
 ```cmd
 pip install eel
+pip install webview
 cd web-src
-npm i
+yarn
 ```
 
 ### Develop front-end
@@ -21,7 +36,7 @@ Run the VUE app.
 
 ```cmd
 cd web-src
-npm run dev
+yarn dev
 ```
 
 With in `web-src\public\eel.js` there is a mock-up eel implementation. This file will be overwritten when building.
@@ -35,7 +50,7 @@ Running the build command will create a folder `/web`. This folder holds build V
 
 ```cmd
 cd web-src
-npm run build
+yarn build
 ```
 
 ### Develop eel.js
@@ -55,10 +70,39 @@ This will build the front-end and then the app as one `.exe` file.
 
 ```cmd
 cd web-src
-npm run build
+yarn build
 cd ..
 pip install pyinstaller
 python -m eel app.py web --onefile
+```
+
+### Manual build with `pyinstaller`.
+
+Follow the instructions below.
+
+```cmd
+cd web-src
+yarn build
+cd ..
+pip install pyinstaller
+```
+
+Build normally with support for printing in the console.
+
+```cmd
+pyinstaller --noconfirm --hide-console hide-early --clean --add-data "web/:web/" --name "YourAppName" "app.py"
+```
+
+Build compressed one file without support for printing in the console, which may take time to decompress.
+
+```cmd
+pyinstaller --noconfirm --noconsole --onefile --clean --add-data "web/:web/" --name "YourAppName" "app.py"
+```
+
+Build compressed one file with support for printing in the console but then hide the console to avoid `sys.std*` error.
+
+```cmd
+pyinstaller --noconfirm --hide-console hide-early --onefile --clean --add-data "web/:web/" --name "YourAppName" "app.py"
 ```
 
 ## Update your current project
@@ -66,17 +110,19 @@ python -m eel app.py web --onefile
 Within `index.html` add:
 
 ```html
-<script type=text/javascript src=/eel.js></script>
+<script type="text/javascript" src="/eel.js"></script>
 ```
 
 In `vite.config.js` add a `build - outDir`
 
 ```js
 export default defineConfig({
+  ...
   plugins: [vue()],
   build: {
     outDir: "../web",
   },
+  ...
 });
 ```
 
