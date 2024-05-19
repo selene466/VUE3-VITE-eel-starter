@@ -25,7 +25,7 @@ Copy this repo and you are ready to start.
 
 ```cmd
 pip install eel
-pip install webview
+pip install pywebview
 cd web-src
 yarn
 ```
